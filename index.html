@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuiz Pendidikan Islam Tahun 2 - Hukum Mim & Nun Syaddah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #064e3b;
+            --primary-light: #047857;
+            --accent: #d97706;
+            --accent-gold: #f59e0b;
+            --bg-color: #f0fdf4;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 15px; }
+
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 650px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 2px solid #a7f3d0;
+            position: relative;
+        }
+
+        .header-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-bg h1 { font-size: 1.4rem; margin-bottom: 5px; color: #fef08a; }
+        .header-bg p { font-size: 0.9rem; opacity: 0.9; }
+
+        .content { padding: 25px; }
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--primary); }
+        .form-group input, .form-group select {
+            width: 100%; padding: 12px 15px; border: 2px solid #cbd5e1; border-radius: 10px; font-size: 1rem;
+        }
+
+        .btn {
+            width: 100%; background: var(--primary-light); color: white; border: none; padding: 14px;
+            font-size: 1.1rem; font-weight: 700; border-radius: 10px; cursor: pointer; transition: 0.2s;
+            display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 10px;
+        }
+        .btn:hover { background: var(--primary); }
+
+        .word-card {
+            background: #ecfdf5; border: 2px dashed #059669; border-radius: 15px; padding: 25px;
+            text-align: center; margin: 20px 0;
+        }
+        .arabic-text { font-family: 'Amiri', serif; font-size: 3.5rem; color: #064e3b; direction: rtl; }
+
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+        .option-btn {
+            background: #f8fafc; border: 2px solid #e2e8f0; padding: 15px; border-radius: 12px;
+            font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.2s; color: #1e293b;
+        }
+        .option-btn:hover { background: #e2e8f0; border-color: var(--primary-light); }
+
+        .share-box {
+            background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px;
+            margin-top: 20px; text-align: center;
+        }
+        .share-box h4 { font-size: 0.95rem; margin-bottom: 12px; color: var(--primary); }
+        .share-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .s-btn {
+            padding: 8px 14px; border-radius: 8px; color: white; text-decoration: none; font-size: 0.85rem;
+            font-weight: 600; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+        }
+        .s-gc { background: #0f9d58; }
+        .s-wa { background: #25d366; }
+        .s-tg { background: #0088cc; }
+        .s-cp { background: #64748b; }
+
+        .cert-box {
+            border: 8px double var(--primary); padding: 20px; border-radius: 15px; background: #fffdf0;
+            text-align: center; margin-top: 15px;
+        }
+        .cert-box h2 { font-family: 'Amiri', serif; font-size: 2rem; color: var(--primary); }
+
+        @media print {
+            body * { visibility: hidden; }
+            #printable-cert, #printable-cert * { visibility: visible; }
+            #printable-cert { position: absolute; left: 0; top: 0; width: 100%; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-bg">
+        <h1>SK PARIT LAPIS</h1>
+        <p>Kuiz Pendidikan Islam Tahun 2: Hukum Mim & Nun Syaddah</p>
+    </div>
+
+    <div class="content">
+        <!-- SCREEN 1: LOGIN -->
+        <div id="screen-start" class="screen active">
+            <div class="form-group">
+                <label>Nama Penuh Murid:</label>
+                <input type="text" id="student-name" placeholder="Masukkan nama penuh...">
+            </div>
+            <div class="form-group">
+                <label>Kelas:</label>
+                <select id="student-class">
+                    <option value="2 Zamrud">2 Zamrud</option>
+                    <option value="2 Baiduri">2 Baiduri</option>
+                    <option value="2 Delima">2 Delima</option>
+                </select>
+            </div>
+            <button class="btn" onclick="startQuiz()">Mula Kuiz Sekarang</button>
+
+            <div class="share-box">
+                <h4>Kongsi Kuiz Ini:</h4>
+                <div class="share-btns">
+                    <button class="s-btn s-gc" onclick="shareGC()">Google Classroom</button>
+                    <button class="s-btn s-wa" onclick="shareWA()">WhatsApp</button>
+                    <button class="s-btn s-tg" onclick="shareTG()">Telegram</button>
+                    <button class="s-btn s-cp" onclick="copyLink()">Salin Pautan</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: QUIZ -->
+        <div id="screen-quiz" class="screen">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+                <span id="q-progress" style="font-weight:600; color:var(--primary);">Soalan 1/20</span>
+                <span id="q-score" style="font-weight:600; color:var(--accent);">Markah: 0</span>
+            </div>
+            <div class="word-card">
+                <div class="arabic-text" id="q-word">إِنَّ</div>
+            </div>
+            <p style="text-align:center; font-weight:600; margin-bottom:15px;">Apakah hukum tajwid bagi kalimah di atas?</p>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer('NUN')">Wajib Ghunnah (Nun Syaddah - نّ)</button>
+                <button class="option-btn" onclick="checkAnswer('MIM')">Wajib Ghunnah (Mim Syaddah - مّ)</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: RESULT & CERT -->
+        <div id="screen-result" class="screen">
+            <div id="printable-cert" class="cert-box">
+                <h2>سِجِلُّ التَّفَوُّقِ</h2>
+                <h3 style="color:var(--primary); margin-top:5px;">SIJIL PENGHARGAAN</h3>
+                <p style="margin-top:15px;">Dengan ini disahkan bahawa</p>
+                <h2 id="cert-name" style="color:var(--accent); margin: 10px 0;">NAMA MURID</h2>
+                <p>dari Kelas <strong id="cert-class">2 Zamrud</strong> telah berjaya menyempurnakan Kuiz Tajwid dengan keputusan:</p>
+                <div style="font-size:2.5rem; font-weight:700; color:var(--primary); margin: 15px 0;" id="cert-score">100 / 100</div>
+                <p>Gred: <strong id="cert-grade">Cemerlang</strong></p>
+            </div>
+
+            <button class="btn" style="background:var(--accent);" onclick="window.print()">Cetak / Simpan Sijil PDF</button>
+            <button class="btn" onclick="location.reload()">Cuba Lagi</button>
+
+            <div class="share-box">
+                <h4>Kongsi Keputusan Kuiz:</h4>
+                <div class="share-btns">
+                    <button class="s-btn s-wa" onclick="shareWA()">WhatsApp</button>
+                    <button class="s-btn s-tg" onclick="shareTG()">Telegram</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { word: 'إِنَّ', type: 'NUN' }, { word: 'ثُمَّ', type: 'MIM' },
+        { word: 'النَّاسِ', type: 'NUN' }, { word: 'عَمَّ', type: 'MIM' },
+        { word: 'الْجَنَّةِ', type: 'NUN' }, { word: 'فَأُمُّهُ', type: 'MIM' },
+        { word: 'الْخَنَّاسِ', type: 'NUN' }, { word: 'حَمَّالَةَ', type: 'MIM' },
+        { word: 'كَنَّا', type: 'NUN' }, { word: 'مِمَّا', type: 'MIM' },
+        { word: 'فَإِنَّهُ', type: 'NUN' }, { word: 'فَلَمَّا', type: 'MIM' },
+        { word: 'النَّبَإِ', type: 'NUN' }, { word: 'أُمٍّ', type: 'MIM' },
+        { word: 'لَيُنْبَذَنَّ', type: 'NUN' }, { word: 'أُمَّتُكُمْ', type: 'MIM' },
+        { word: 'إِنَّمَا', type: 'NUN' }, { word: 'تَمَّتْ', type: 'MIM' },
+        { word: 'مِنَّا', type: 'NUN' }, { word: 'مِمَّنْ', type: 'MIM' }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+    let studentName = '';
+    let studentClass = '';
+
+    function showScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    function startQuiz() {
+        studentName = document.getElementById('student-name').value.trim();
+        studentClass = document.getElementById('student-class').value;
+
+        if (!studentName) {
+            alert('Sila masukkan nama penuh murid terlebih dahulu.');
+            return;
+        }
+
+        currentQ = 0;
+        score = 0;
+        loadQuestion();
+        showScreen('screen-quiz');
+    }
+
+    function loadQuestion() {
+        document.getElementById('q-progress').innerText = `Soalan ${currentQ + 1}/20`;
+        document.getElementById('q-score').innerText = `Markah: ${score}`;
+        document.getElementById('q-word').innerText = questions[currentQ].word;
+    }
+
+    function checkAnswer(answer) {
+        if (answer === questions[currentQ].type) {
+            score += 5;
+        }
+        currentQ++;
+        if (currentQ < questions.length) {
+            loadQuestion();
+        } else {
+            finishQuiz();
+        }
+    }
+
+    function finishQuiz() {
+        document.getElementById('cert-name').innerText = studentName;
+        document.getElementById('cert-class').innerText = studentClass;
+        document.getElementById('cert-score').innerText = `${score} / 100`;
+
+        let grade = 'Cemerlang';
+        if (score < 80) grade = 'Baik';
+        if (score < 50) grade = 'Memuaskan';
+        document.getElementById('cert-grade').innerText = grade;
+
+        showScreen('screen-result');
+    }
+
+    function shareGC() { window.open(`https://classroom.google.com/share?url=${encodeURIComponent(window.location.href)}`, '_blank'); }
+    function shareWA() { window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Mari cuba Kuiz Pendidikan Islam Tahun 2: ' + window.location.href)}`, '_blank'); }
+    function shareTG() { window.open(`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}`, '_blank'); }
+    function copyLink() {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Pautan kuiz telah disalin!');
+    }
+</script>
+
+</body>
+</html>
